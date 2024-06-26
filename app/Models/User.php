@@ -20,7 +20,21 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-    ];
+        'first name',
+        'tel',
+        'diploma',
+        'speciality',
+        'enterprise name',
+        'available place',
+        'description',
+        'enterprise speciality',
+        'post requirement',
+        'duration',
+        'salary/wages',
+        'enterprise location',
+        'no diploma?',
+        'image',
+        ];
 
     /**
      * The attributes that should be hidden for serialization.
