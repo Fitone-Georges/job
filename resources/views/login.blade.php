@@ -1,45 +1,52 @@
 @extends('layout')
 @section('title','login')
 @section('content')
-<section class="vh-100" style="background-color: white">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-6">
-        <div>
-          <div class="row g-0">
-              <div class="card-body p-4 p-lg-5 text-black">
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100" style="background-color: #f3f2f2;">
+      <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-4 d-none d-md-block">
+                  <img
+                    src="https://mdbootstrap.com/img/Photos/Others/sidenav2.jpg"
+                    alt="login form"
+                    class="img-fluid" style="border-top-left-radius: 1rem; border-bottom-left-radius: 1rem;"
+                  />
+                </div>
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="card-body py-5 px-4 p-md-5">
 
-                <form style="text-align: center;">
+                    <form action="">
+                      <h4 class="fw-bold mb-4" style="color: #92aad0;">Log in to your account</h4>
+                      <p class="mb-4" style="color: #45526e;">To log in, please fill in these text fiels with your e-mail address and password.</p>
 
-                  <div class="align-items-center mb-5 pb-1">
-                    <span class="h1 fw-bold mb-0">Login</span>
+                      <div class="form-outline mb-4">
+                        <input type="email" id="form2Example1" class="form-control" />
+                        <label class="form-label" for="form2Example1">Email address</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="password" id="form2Example2" class="form-control" />
+                        <label class="form-label" for="form2Example2">Password</label>
+                      </div>
+
+                      <div class="d-flex justify-content-end pt-1 mb-4">
+                        <button class="btn btn-primary btn-rounded" type="button" style="background-color: #92aad0;">Log in</button>
+                      </div>
+                      <hr>
+                      <a class="link float-end" href="#!">Forgot password? Click here.</a>
+                    </form>
+
                   </div>
-
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Please login into <br> your Account</h5>
-
-                  <div data-mdb-input-init class="form-outline mb-4" >
-                    <input type="email" class="form-control" id="password" name="email" placeholder="Email" style="background-color: #d9d9d9;border-radius: 8px; text-align: center;"> 
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="background-color: #d9d9d9;border-radius: 8px; text-align: center;">
-                  </div>
-
-                  <div class="pt-1 mb-4">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" type="button" style="background-color: #c63b3b;border-radius: 8px">Login</button>
-                  </div>
-
-                  <p class="mb-5 mt-5 pb-lg-2">Don't have an account?
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" type="button" style="background-color: #c63b3b;border-radius: 8px; margin-left: 6%">Create</button>
-                  </p>
-
-                </form>
-
+                </div>
               </div>
-            
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>@endsection
+</section>
