@@ -11,8 +11,8 @@ Route::get('/registration', [AuthManager::class, 'registration'])->name('registr
 Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('registration.post');
 Route::get('/blog', [AuthManager::class, 'blog'])->name('blog');
 Route::post('/blog', [AuthManager::class, 'blogPost'])->name('blog.post');
-Route::get('/search', [AuthManager::class, 'search'])->name('search');
-Route::post('/search', [AuthManager::class, 'searchPost'])->name('search.post');
+Route::get('/apply', [AuthManager::class, 'apply'])->name('apply');
+Route::post('/apply', [AuthManager::class, 'applyPost'])->name('apply.post');
 Route::get('/jsr', [AuthManager::class, 'jsr'])->name('jsr');
 Route::post('/jsr', [AuthManager::class, 'jsrPost'])->name('jsr.post');
 Route::get('/jpr', [AuthManager::class, 'jpr'])->name('jpr');

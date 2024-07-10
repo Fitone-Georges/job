@@ -24,12 +24,12 @@
                       <p class="mb-4" style="color: #45526e;">To log in, please fill in these text fiels with your e-mail address and password.</p>
 
                       <div class="form-outline mb-4">
-                        <input type="email" id="form2Example1" class="form-control" />
+                        <input type="email" id="email" class="form-control" />
                         <label class="form-label" for="form2Example1">Email address</label>
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="password" id="form2Example2" class="form-control" />
+                        <input type="password" id="password" class="form-control" />
                         <label class="form-label" for="form2Example2">Password</label>
                       </div>
 
