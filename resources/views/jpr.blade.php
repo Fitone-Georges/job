@@ -61,7 +61,10 @@
 
                 <h1 class="mb-5 text-center">REGISTRATION FORM</h1>
 
-                <form>
+              
+        <form action="{{route('jpr.post')}}" method="POST" class="ms-auto me-auto" style="width: 500px">
+            @csrf
+
                   <!-- 2 column grid layout with text inputs for the first and last names -->
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
@@ -112,7 +115,7 @@
                    <br>
                    <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
-                      <label class="form-label" for="form6Example2">Representative Tel</label>
+                      <label class="form-label" for="form6Example2">Tel</label>
                         <input type="text" id="representative tel" class="form-control" />
                         
                       </div>
@@ -130,3 +133,4 @@
     </div>
   </div>
 </section>
+@endsection

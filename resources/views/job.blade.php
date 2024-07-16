@@ -21,17 +21,7 @@
         <div class="card" style="border-radius: 15px;">
           <div class="card-body">
 
-            <div class="row align-items-center pt-4 pb-3">
-              <div class="col-md-3 ps-5">
-
-                <h6 class="mb-0">Full name</h6>
-
-              </div>
-              <div class="col-md-9 pe-5">
-
-                <input type="text" class="form-control form-control-lg" />
-
-              </div>
+      
             </div>
 
             <hr class="mx-n3">

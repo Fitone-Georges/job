@@ -19,7 +19,8 @@
                 <div class="col-md-8 d-flex align-items-center">
                   <div class="card-body py-5 px-4 p-md-5">
 
-                    <form action="">
+                  <form action="{{route('login.post')}}" method="POST" class="ms-auto me-auto" style="width: 500px">
+               @csrf
                       <h4 class="fw-bold mb-4" style="color: #92aad0;">Log in to your account</h4>
                       <p class="mb-4" style="color: #45526e;">To log in, please fill in these text fiels with your e-mail address and password.</p>
 
@@ -50,3 +51,4 @@
     </div>
   </div>
 </section>
+@endsection

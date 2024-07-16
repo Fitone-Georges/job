@@ -61,7 +61,10 @@
 
                 <h1 class="mb-5 text-center">REGISTRATION FORM</h1>
 
-                <form>
+                     
+        <form action="{{route('jsr.post')}}" method="POST" class="ms-auto me-auto" style="width: 500px">
+            @csrf
+
                   <!-- 2 column grid layout with text inputs for the first and last names -->
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
@@ -121,10 +124,10 @@
                      <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
                         
-                        <p>Having a Diploma?</p>
-                        <input type="radio" id="male" value="no">
+                        <p>Diploma?</p>
+                        <input type="radio" id="male" name="gender" value="male">
                         <label for="yes">Yes</label><br>
-                        <input type="radio" id="no" value="no">
+                        <input type="radio" id="no" name="gender" value="female">
                            <label for="no">No</label><br>
                     </div>
                      <br>
@@ -143,3 +146,4 @@
     </div>
   </div>
 </section>
+@endsection
