@@ -3,7 +3,7 @@
 @section('content')
 <section class="intro">
   <div class="bg-image h-100">
-    <div class="mask d-flex align-items-center h-100" style="background-color: #f3f2f2;">
+    <div class="mask d-flex align-items-center h-100" style="background-color: ">
       <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
           <div class="col-12 col-lg-9 col-xl-8">
@@ -38,7 +38,7 @@
                         <button class="btn btn-primary btn-rounded" type="button" style="background-color: #92aad0;">Log in</button>
                       </div>
                       <hr>
-                      <a class="link float-end" href="#!">Forgot password? Click here.</a>
+                      <a class="link float-end" href="#!">Register Here.</a>
                     </form>
 
                   </div>
