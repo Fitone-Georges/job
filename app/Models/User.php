@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -18,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'email',
         'first_name',
         'company_name',
         'company_location',
@@ -29,7 +31,7 @@ class User extends Authenticatable
         'speciality',
         'date_of_birth',
         'job_description',
-        'salarary_/_wages',
+        'salary_wages',
         'enterprise_domain',
         'enterprise_location',
         ];

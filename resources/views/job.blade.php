@@ -8,7 +8,8 @@
         <div class="container">
         </div>
     </header>
-  
+    <form action="{{route('job.post')}}" method="POST" class="ms-auto me-auto" style="width: 500px">
+               @csrf
     <div class="container px-3 py-4 px-md-5 text-center text-lg-start my-">
         <div class="row gx-lg-5 align-items-center mb-3">
             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">

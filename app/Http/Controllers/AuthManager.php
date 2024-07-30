@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class AuthManager extends Controller
 {
@@ -10,6 +16,7 @@ class AuthManager extends Controller
     {
         return view('login');
     }
+
     function welcome()
     {
         return view('welcome');
@@ -19,143 +26,197 @@ class AuthManager extends Controller
     {
         return view('jpr');
     }
+
     function jsr()
     {
         return view('jsr');
     }
+
     function registration()
     {
         return view('registration');
     }
+
     function job()
     {
         return view('job');
     }
+
     function search()
     {
         return view('search');
     }
+
     function blog()
     {
         return view('blog');
     }
 
-    function loginPost(Request $request)
+    public function loginPost(Request $request)
     {
-
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        $validator= Validator::make($request->all(),[
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
         ]);
-
-        $credentials = $request->only('email', 'password');         //requesting only email & password to login
-
-        if (Auth::attempt($credentials)) {
-
-            /** @var User $users */
-            $user = Auth::User();
-            if ($user->role == 'job_poster') {
-                return redirect()->route('blog'); // Redirect to the jpr
-            }
+        $credentials = $request->only('email', 'password'); // requesting only email & password to login
         
+        if (Auth::attempt($credentials)) {
+            /** @var User $users */
+          
+            $user = Auth::user();
+            if ($user->role === 'job_poster') {
+                 
+                return redirect()->route('blog'); 
+            }
+
             return redirect()->route('search');
         }
 
-}
-
-
- function registrationPost(Request $request)
-{
-    $request->validate([
-        'role' => 'required|in:job_seeker,job_poster',
-    ]);
-
-    $user = Auth::user();
-    $user->role = $request->role;
-    $user->save();
-
-    if ($user->role == 'job_poster') {
-        return redirect()->route('jpr'); // Redirect to the jpr
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
-    return redirect()->route('jsr');
-}
+    public function registrationPost(Request $request)
+    {
+        // Validate the role input
+        $request->validate([
+            'role' => 'required|in:job_seeker,job_poster',
+        ]);
 
-function jsrPost(Request $request)
-{
-    $request->validate([   //from line 54-66 if the users name , email , password are correct return a successful message to the user  else return an error message
-        'name' => 'required',
-        'email' => 'required|email|unique:users',
-        'password' => 'required',
-        'first_name' => 'required',
-        'tel' => 'required' ,
-        'specialty' => 'required',
-        'date_of_birth' => 'required',
+        // Check if the user is authenticated
+        $user = Auth::user();
 
-    ]);
-    $data['name'] = $request-> input('name');
-    $data['email'] = $request-> input('email');
-    $data['password'] =Hash::make( $request-> input('password'));  
-    $data['first_name'] = $request-> input('first_name');
-    $data['tel'] = $request-> input('tel');
-    $data['specialty'] = $request-> input('specialty');
-    $data['date_of_birth'] = $request-> input('date_of_birth');
-       $user = User::create($data);
-       if(!$user){
-           return redirect(route('registration'))->with("error", "registration failed");
-       }
-       return redirect(route('login'))->with("success", "registration successful");
-}
+        if (!$user) {
+            // If the user is not authenticated, redirect based on the role selected
+            if ($request->role == 'job_poster') {
+                return redirect()->route('jpr')->withErrors(['error' => 'User not authenticated, but redirecting to job poster page']);
+            } else {
+                return redirect()->route('jsr')->withErrors(['error' => 'User not authenticated, but redirecting to job seeker page']);
+            }
+        }
 
-function jprPost(Request $request)
-{
-    $request->validate([   //from line 54-66 if the users name , email , password are correct return a successful message to the user  else return an error message
-        'company_name' => 'required',
-        'email' => 'required|email|unique:users',
-        'password' => 'required',
-        'company_location' => 'required',
-        'tel' => 'required' ,
-        'specialty' => 'required',
-        'date_of_birth' => 'required',
+        // If the user is authenticated, assign the role to the user and save
+        $user->role = $request->role;
 
-    ]);
-    $data['company_name'] = $request-> input('company_name');
-    $data['email'] = $request-> input('email');
-    $data['password'] =Hash::make( $request-> input('password'));  
-    $data['company_location'] = $request-> input('company_location');
-    $data['representative_name'] = $request-> input('representative_name');
-    $data['representative_address'] = $request-> input('representative_address');
-    $data['representative_tel'] = $request-> input('representative_tel');
-       $user = User::create($data);
-       if(!$user){
-           return redirect(route('registration'))->with("error", "registration failed");
-       }
-       return redirect(route('login'))->with("success", "registration successful");
-}
+        if ($user->save()) {
+            // Redirect based on the user's role
+            if ($user->role == 'job_poster') {
+                return redirect()->route('jpr'); // Redirect to the job poster route
+            } else {
+                return redirect()->route('jsr'); // Redirect to the job seeker route
+            }
+        }
 
-function blogPost(Request $request)
-{
-    $request->validate([   //from line 54-66 if the users name , email , password are correct return a successful message to the user  else return an error message
-        'company_name' => 'required',
-        'email' => 'required|email|unique:users',
-        'job_description' => 'required',
-        'salary_wages' => 'required',
-        'enterprise_domain' => 'required' ,
-        'enterprise_location' => 'required',
+        // Handle the case where save operation fails
+        return back()->withErrors(['error' => 'Failed to update user role']);
+    }
 
-    ]);
-    $data['company_name'] = $request-> input('company_name');
-    $data['email'] = $request-> input('email');
-    $data['job_description'] =Hash::make( $request-> input('job_description'));  
-    $data['salary_wages'] = $request-> input('salary_wages');
-    $data['enterprise_domain'] = $request-> input('enterprise_domain');
-    $data['enterprise_location'] = $request-> input('enterprise_location');
+    public function jsrPost (Request $request)
+    {  
+        //Log::info('Received registration request' , $request->all()); //......reste of the code
+        
+        $validator= Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'first_name' => 'required|string',
+            'tel' => 'required|string',
+            'speciality' => 'required|string',
+            'date_of_birth' => 'required|string',
+            
+        ]); 
+    
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'first_name' => $request->input('first_name'),
+            'tel' => $request->input('tel'),
+            'speciality' => $request->input('speciality'),
+            'date_of_birth' => $request->input('date_of_birth'),
+             
+        ];
+        $user = User::create($data);
+        $user->save();
+       
+        if (!$user) {
+            return redirect(route('login'))->with('success', 'Registration successful');
+        }
+ 
+        
+        return redirect(route('login'))->with('Error');
+    }
+    
+    public function jprPost (Request $request)
+    {
+        // Validate the request data
+        $validator= Validator::make($request->all(),[
+            'company_name' =>  'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'company_location' =>  'required|string',
+            'representative_name' =>  'required|string',
+            'representative_address' =>  'required|string',
+            'representative_tel' =>  'required|string',
+        ]);
 
-       $user = User::create($data);
-       if(!$user){
-           return redirect(route('blog'))->with("error", "Post failed");
-       }
-       return redirect(route('welcome'))->with("success", "Post successful");
-}
+        // Prepare the data for insertion
+        $data = [
+            'company_name' => $request->input('company_name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'company_location' => $request->input('company_location'),
+            'representative_name' => $request->input('representative_name'),
+            'representative_address' => $request->input('representative_address'),
+            'representative_tel' => $request->input('representative_tel'),
+        ];
 
+        $user = User::create($data);
+        $user->save();
+
+        if (!$user) {
+            return redirect(route('login'))->with('success', 'Registration successful');
+        }
+
+        return redirect(route('login'))->with('Error');
+    }
+
+    public function blogPost (Request $request)
+    {
+        // Validate the request data
+        $validator= Validator::make($request->all(),[
+            'company_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'job_description' => 'required',
+            'salary_wages' => 'required',
+            'enterprise_domain' => 'required',
+            'enterprise_location' => 'required',
+        ]);
+
+        // Prepare the data for insertion
+        $data = [
+            'company_name' => $request->input('company_name'),
+            'email' => $request->input('email'),
+            'job_description' => $request->input('job_description'),
+            'salary_wages' => $request->input('salary_wages'),
+            'enterprise_domain' => $request->input('enterprise_domain'),
+            'enterprise_location' => $request->input('enterprise_location'),
+        ];
+
+        
+        $user = User::create($data);
+        $user->save();
+        
+
+        if (!$user) {
+            return redirect(route('search'))->with('error', 'Post failed');
+        }
+
+        return redirect(route('search'))->with('success', 'Post successful');
+    }
+
+    public function allBloPost(Request $request)
+    {
+        $users=User::all();
+        return  view('search',compact('$users'));
+    }
 }

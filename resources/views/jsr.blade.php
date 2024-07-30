@@ -62,43 +62,44 @@
                 <div class="row">
                   <div class="col-12 col-md-6 mb-4">
                     <div class="form-outline">
-                      <label class="form-label" for="form6Example1">Name</label>
+                      <label class="form-label" for="name">Name</label>
                       <input type="text" id="name" name="name" class="form-control" />
                     </div>
                   </div>
                   <div class="col-12 col-md-6 mb-4">
                     <div class="form-outline">
-                      <label class="form-label" for="form6Example2">First Name</label>
+                      <label class="form-label" for="first_name">First Name</label>
                       <input type="text" id="first_name" name="first_name" class="form-control" />
                     </div>
                   </div>
                 </div>
+                <!-- bcrypt input -->
                 <div class="form-outline">
-                  <label class="form-label" for="form6Example3">Password</label>
-                  <input type="text" id="password" name="password" class="form-control" />
+                  <label class="form-label" for="password">Password</label>
+                  <input type="password" id="password" name="password" class="form-control" />
                 </div>
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example4">Email</label>
+                  <label class="form-label" for="email">Email</label>
                   <input type="text" id="email" name="email"  class="form-control" />
                 </div>
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example5">Tel</label>
-                  <input type="email" id="tel" name="tel" class="form-control" />
+                  <label class="form-label" for="tel">Tel</label>
+                  <input type="text" id="tel" name="tel" class="form-control" />
                 </div>
                 <div class="col-12 col-md-6 mb-4">
                   <div class="form-outline">
-                    <label class="form-label" for="form6Example2">Specialty</label>
-                    <input type="text" id="specialty" name="specialty" class="form-control" />
+                    <label class="form-label" for="speciality">Speciality</label>
+                    <input type="text" id="speciality" name="speciality" class="form-control" />
                   </div>
                 </div>
                 <div class="col-12 col-md-6 mb-4">
                   <div class="form-outline">
-                    <label class="form-label" for="form6Example2">Date of Birth</label>
-                    <input type="date" id="date_ofdate_of_birthbirth" name="date_of_birth" class="form-control" />
+                    <label class="form-label" for="date_of_birth">Date of Birth</label>
+                    <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" />
                   </div>
                   <br>
                   <br>
-                <button type="submit" class="btn btn-secondary btn-rounded btn-block">Submit</button>
+                <button type="submit" class="btn btn-secondary btn-rounded btn-block" >Submit</button>
                 
               </form>
             </section>

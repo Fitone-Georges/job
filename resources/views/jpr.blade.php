@@ -69,53 +69,55 @@
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
-                      <label class="form-label" for="form6Example1">Company name</label>
+                      <label class="form-label" for="Company_name">Company Name</label>
                         <input type="text" id="company_name" name="company_name" class="form-control" />
                         
                       </div>
                     </div>
+                    <!-- Email input -->
                     <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
-                      <label class="form-label" for="form6Example2">Email</label>
+                      <label class="form-label" for="email">Email</label>
                         <input type="text" id="email" name="email" class="form-control" />
                         
                       </div>
                     </div>
                   </div>
 
-                  <!-- Text input -->
+                  <!-- password input -->
                   <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example3">Password</label>
-                    <input type="text" id="password" name="password"  class="form-control" />
+                  <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password"  name="password"  class="form-control" />
                     
                   </div>
 
                   <!-- Text input -->
                   <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example4">Company Location</label>
+                  <label class="form-label" for="company_location">Company Location</label>
                     <input type="text" id="company_location" name="company_location"  class="form-control" />
                     
                   </div>
 
-                  <!-- Email input -->
+                   <!-- Text input -->
                   <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example5">Representative Name </label>
-                    <input type="email" id="representative_name"  name="representative_name" class="form-control" />
+                  <label class="form-label" for="representative_name">Representative Name </label>
+                    <input type="text" id="representative_name"  name="representative_name" class="form-control" />
                     
                   </div>
 
                 
-                  <!-- Message input -->
+                  <!-- Text input -->
                  <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
-                      <label class="form-label" for="form6Example2">Representative Address</label>
+                      <label class="form-label" for="representative_address">Representative Address</label>
                         <input type="text" id="representative_address" name="representative_address" class="form-control" />
                         
                       </div> 
                    <br>
+                    <!-- Number input -->
                    <div class="col-12 col-md-7 mb-6">
                       <div class="form-outline">
-                      <label class="form-label" for="form6Example2">Representative Tel</label>
+                      <label class="form-label" for="representative_tel">Representative Tel</label>
                         <input type="text" id="representative_tel" name="representative_tel" class="form-control" />
                         
                       </div>

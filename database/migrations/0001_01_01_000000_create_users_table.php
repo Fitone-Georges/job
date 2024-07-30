@@ -13,23 +13,23 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('first_name');
-            $table->string('company_name');
-            $table->string('company_location');
-            $table->string('representative_name');
-            $table->string('representative_address');
-            $table->integer('representative_tel');
+            $table->string('name')->default('');
+            $table->string('first_name')->default('');
+            $table->string('company_name')->default('LAB2VIEW')->nullable();
+            $table->string('company_location')->default('DOUALA')->nullable();
+            $table->string('representative_name')->default('William')->nullable();
+            $table->string('representative_address')->default('Kotto')->nullable();
+            $table->integer('representative_tel')->default('659452067')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('tel');
-            $table->string('speciality');
-            $table->string('date_of_birth');
-            $table->string('job_description');
-            $table->string('salarary_wages');
-            $table->string('enterprise_domain');
-            $table->string('enterprise_location');
+            $table->string('password')->default('');
+            $table->string('tel')->default('');
+            $table->string('speciality')->default('');
+            $table->string('date_of_birth')->default('');
+            $table->string('job_description')->default('Software_Developper')->nullable();
+            $table->string('salary_wages')->default('50.000k')->nullable();
+            $table->string('enterprise_domain')->default('Software')->nullable();
+            $table->string('enterprise_location')->default('B.sadi')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
