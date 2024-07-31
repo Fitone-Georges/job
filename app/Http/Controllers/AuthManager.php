@@ -10,94 +10,86 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-class AuthManager extends Controller
-{
-    function login()
-    {
-        return view('login');
+class AuthManager extends Controller {
+    public function login() {
+        return view( 'login' );
     }
 
-    function welcome()
-    {
-        return view('welcome');
+    public function welcome() {
+        return view( 'welcome' );
     }
 
-    function jpr()
-    {
-        return view('jpr');
+    public function jpr() {
+        return view( 'jpr' );
     }
 
-    function jsr()
-    {
-        return view('jsr');
+    public function jsr() {
+        return view( 'jsr' );
     }
 
-    function registration()
-    {
-        return view('registration');
+    public function registration() {
+        return view( 'registration' );
     }
 
-    function job()
-    {
-        return view('job');
+    public function job() {
+        return view( 'job' );
     }
 
-    function search()
-    {
-        return view('search');
+    public  function search() {
+        return view( 'search' );
     }
 
-    function blog()
-    {
-        return view('blog');
+    public function blog() {
+        return view( 'blog' );
     }
 
-    public function loginPost(Request $request)
-    {
-        $validator= Validator::make($request->all(),[
+    public function loginPost( Request $request ) {
+        $validator = Validator::make( $request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8',
-        ]);
-        $credentials = $request->only('email', 'password'); // requesting only email & password to login
-        
-        if (Auth::attempt($credentials)) {
-            /** @var User $users */
+        ] );
+        $credentials = $request->only( 'email', 'password' );
+        // requesting only email & password to login
+      
+        //verifier si l'utilisateur est authentifier 
+
+        if(Auth::attempt($credentials) && Auth::user()->role==='job_seeker' )
+        {
           
-            $user = Auth::user();
-            if ($user->role === 'job_poster') {
-                 
-                return redirect()->route('blog'); 
-            }
-
-            return redirect()->route('search');
+                return redirect()->route('search');
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        else if (Auth::attempt($credentials) && Auth::user()->role==='job_poster' ){
+           
+        return redirect()->route('blog');
+        }
+        else
+        {
+            return back()->withErrors(['email' => 'Invalid credentials']);
+        }
     }
 
-    public function registrationPost(Request $request)
-    {
+    public function registrationPost( Request $request ) {
         // Validate the role input
-        $request->validate([
+        $request->validate( [
             'role' => 'required|in:job_seeker,job_poster',
-        ]);
+        ] );
 
         // Check if the user is authenticated
         $user = Auth::user();
 
-        if (!$user) {
+        if ( !$user ) {
             // If the user is not authenticated, redirect based on the role selected
-            if ($request->role == 'job_poster') {
-                return redirect()->route('jpr')->withErrors(['error' => 'User not authenticated, but redirecting to job poster page']);
+            if ( $request->role == 'job_poster' ) {
+                return redirect()->route( 'jpr' )->withErrors( [ 'error' => 'User not authenticated, but redirecting to job poster page' ] );
             } else {
-                return redirect()->route('jsr')->withErrors(['error' => 'User not authenticated, but redirecting to job seeker page']);
+                return redirect()->route( 'jsr' )->withErrors( [ 'error' => 'User not authenticated, but redirecting to job seeker page' ] );
             }
         }
 
         // If the user is authenticated, assign the role to the user and save
         $user->role = $request->role;
 
-        if ($user->save()) {
+        if ( $user->save() ) {
             // Redirect based on the user's role
             if ($user->role == 'job_poster') {
                 return redirect()->route('jpr'); // Redirect to the job poster route
@@ -117,7 +109,7 @@ class AuthManager extends Controller
         $validator= Validator::make($request->all(),[
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
             'first_name' => 'required|string',
             'tel' => 'required|string',
             'speciality' => 'required|string',
@@ -217,6 +209,6 @@ class AuthManager extends Controller
     public function allBloPost(Request $request)
     {
         $users=User::all();
-        return  view('search',compact('$users'));
+        return  view('search',compact('users' ) );
+        }
     }
-}
