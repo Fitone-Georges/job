@@ -64,28 +64,24 @@ class AuthManager extends Controller
             /** @var User $users */
           
             $user = Auth::user();
-            if ($user->role === 'job_poster') {
-                 
-                return redirect()->route('blog'); 
+            if ($user->role === 'job_seeker') {
+                return view('search', ['users' => $users ?? []]);
+            } elseif ($user->role === 'job_poster') {
+                return redirect()->route('blog');
             }
-
-            return redirect()->route('search');
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        
+        return redirect()->route('login')->with('error', 'Invalid credentials');
     }
-
     public function registrationPost(Request $request)
     {
         // Validate the role input
         $request->validate([
             'role' => 'required|in:job_seeker,job_poster',
         ]);
-
+    
         // Check if the user is authenticated
-        $user = Auth::user();
-
-        if (!$user) {
+        if (!Auth::check()) {
             // If the user is not authenticated, redirect based on the role selected
             if ($request->role == 'job_poster') {
                 return redirect()->route('jpr')->withErrors(['error' => 'User not authenticated, but redirecting to job poster page']);
@@ -93,10 +89,14 @@ class AuthManager extends Controller
                 return redirect()->route('jsr')->withErrors(['error' => 'User not authenticated, but redirecting to job seeker page']);
             }
         }
-
+    
         // If the user is authenticated, assign the role to the user and save
+        $user = Auth::user();
         $user->role = $request->role;
-
+    
+        // Debugging: Log the role before saving
+        Log::info('Role to be saved: ' . $user->role);
+    
         if ($user->save()) {
             // Redirect based on the user's role
             if ($user->role == 'job_poster') {
@@ -105,11 +105,10 @@ class AuthManager extends Controller
                 return redirect()->route('jsr'); // Redirect to the job seeker route
             }
         }
-
+    
         // Handle the case where save operation fails
         return back()->withErrors(['error' => 'Failed to update user role']);
     }
-
     public function jsrPost (Request $request)
     {  
         //Log::info('Received registration request' , $request->all()); //......reste of the code
@@ -134,6 +133,7 @@ class AuthManager extends Controller
             'speciality' => $request->input('speciality'),
             'date_of_birth' => $request->input('date_of_birth'),
              
+            'role' => 'job_seeker',
         ];
         $user = User::create($data);
         $user->save();
@@ -168,6 +168,8 @@ class AuthManager extends Controller
             'representative_name' => $request->input('representative_name'),
             'representative_address' => $request->input('representative_address'),
             'representative_tel' => $request->input('representative_tel'),
+
+            'role' => 'job_poster',
         ];
 
         $user = User::create($data);
@@ -214,9 +216,12 @@ class AuthManager extends Controller
         return redirect(route('search'))->with('success', 'Post successful');
     }
 
-    public function allBloPost(Request $request)
+    public function showPosts()
     {
-        $users=User::all();
-        return  view('search',compact('$users'));
-    }
-}
+        $users = User::where('role', 'job_poster')->get();
+    
+        // Log the users to check
+        \Log::info('Users:', $users->toArray());
+    
+        return view('search', compact('users'));
+    }}
