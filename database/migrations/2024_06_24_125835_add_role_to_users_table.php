@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['job_poster', 'job_seeker'])->default('job_seeker')->nullable();
+            $table->enum('role', ['job_poster', 'job_seeker'])->nullable();
         });
     }
 

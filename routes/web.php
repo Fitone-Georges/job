@@ -9,7 +9,7 @@ Route::get('/registration', [AuthManager::class, 'registration'])->name('registr
 Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('registration.post');
 Route::get('/blog', [AuthManager::class, 'blog'])->name('blog');
 Route::post('/blog', [AuthManager::class, 'blogPost'])->name('blog.post');
-Route::get('/search', [AuthManager::class, 'search'])->name('search');
+Route::get('/search', [AuthManager::class, 'allBloPost'])->name('search');
 Route::post('/search', [AuthManager::class, 'searchPost'])->name('search.post');
 Route::get('/jsr', [AuthManager::class, 'jsr'])->name('jsr');
 Route::post('/jsr', [AuthManager::class, 'jsrPost'])->name('jsr.post');
