@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Post extends Model
 {
@@ -19,7 +21,7 @@ class Post extends Model
 
    {
         return $this->belongsTo(User::class);
-        $posts = Post::all(); // Fetch all posts
-        return view('jobs.list', compact('posts'));
+        // $posts = Post::all(); // Fetch all posts
+        return $this->belongsTo(User::class);
     }
 }
