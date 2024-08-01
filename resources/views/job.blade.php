@@ -8,7 +8,20 @@
             <div class="container">
             </div>
         </header>
-        <form action="{{ route('job.post') }}" method="POST" class="ms-auto me-auto" style="width: 500px">
+        <head>
+    <!-- Other head elements -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+</head>
+@yield('content')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script>
+    @if(session('job_apply_sent'))
+        swal("Success!", "{{ session('job_apply_sent') }}", "success");
+    @endif
+</script>
+</body>
+        <form action="{{ route('job.post') }}" method="POST" class="ms-auto me-auto" style="width: 800px">
             @csrf
             <div class="container px-3 py-4 px-md-5 text-center text-lg-start my-">
                 <div class="row gx-lg-5 align-items-center mb-3">
@@ -54,6 +67,8 @@
                                             <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-primary btn-lg">Send application</button>
                                         </div>
+                                        <body>
+  
                                     </div>
                                 </div>
                             </section>

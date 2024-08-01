@@ -16,17 +16,20 @@
           <a  class="nav-link active" aria-current="page" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="registration.blade.php">Register</a>
+          <a class="nav-link" href="login">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="blog.blade.php">Post</a>
+          <a class="nav-link" href="registration">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="search.blade.php">Job</a>
+          <a class="nav-link" href="search">Job</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link" href="blog">Post</a>
         </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+</li>
        
       </ul>
     </div>

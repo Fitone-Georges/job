@@ -78,12 +78,8 @@
                   <label class="form-label" for="password">Password</label>
                   <input type="password" id="password" name="password" class="form-control" />
                 </div>
-                <div class="form-outline">
-                    <label class="form-label" for="confirmpassword">confirmez le mot de passe </label>
-                    <input type="password" id="confirmpassword" name="confirmpassword" class="form-control" />
-                  </div>
-
-                <div class="form-outline mb-4">
+              
+                  <div class="form-outline mb-4">
                   <label class="form-label" for="email">Email</label>
                   <input type="text" id="email" name="email"  class="form-control" />
                 </div>

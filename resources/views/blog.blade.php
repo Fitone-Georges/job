@@ -3,7 +3,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <section class="vh-100" style="background-color: #DCDCDC">
+<section class="background-radial-gradient overflow-hidden">
+  <style>
+    .background-radial-gradient {
+      background-color: hsl(218, 41%, 15%);
+      background-image: radial-gradient(650px circle at 0% 0%,
+          hsl(218, 41%, 35%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+          hsl(218, 41%, 45%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%);
+    }
+
+    #radius-shape-1 {
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+  </style>
+
         <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-">
             <div class="row gx-lg-5 align-items-center mb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
@@ -37,6 +79,20 @@
                                     <input type="text" id="job_description" name="job_description" class="form-control" />
                                 </div>
 
+                                <div class="mb-3">
+                <label for="qualification" class="form-label">Qualification</label>
+                <select class="form-control" id="qualification" name="qualification" required>
+                    <option value="" disabled selected>Select your qualification</option>
+                    <optgroup label="Qualifications">
+                        <option value="HND">HND</option>
+                        <option value="PHD">PHD</option>
+                        <option value="GCE">GCE</option>
+                        <option value="MASTER DEGREE">MASTER DEGREE</option>
+                        <option value="NO DIPLOMA">NO DIPLOMA</option>
+                    </optgroup>
+                </select>
+            </div>
+
                                 <!-- Salary / Wages -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="salary_wages">Salary / Wages</label>
@@ -60,7 +116,7 @@
                                         <h6 class="mb-8">Company Structure</h6>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input class="form-control form-control-lg" id="formFileLg" type="file" name="company_structure" />
+                                        <input class="form-control form-control-lg" type='file' id="images" enctype='multipart/form-data' name="images" />
                                         <div class="small text-muted mt-2">Upload your company image structure or any other relevant file. Max file size 50 MB</div>
                                     </div>
                                 </div>
@@ -73,7 +129,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    
 </body>
 </html>
 @endsection

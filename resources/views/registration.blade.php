@@ -1,10 +1,8 @@
 @extends('layout')
 @section('content')
-
 <div class="container">
     <h1 class="text-center my-4">Choose your role</h1>
     <form action="{{ route('registration.post') }}" method="POST">
-    
         @csrf
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -25,7 +23,7 @@
                         <p class="card-text">Post job offers and find candidates.</p>
                         <label>
                             <input type="radio" name="role" value="job_poster" required>
-                        </label>
+                            </label>
                     </div>
                 </div>
             </div>
@@ -35,6 +33,4 @@
         </div>
     </form>
 </div>
-
-
 @endsection

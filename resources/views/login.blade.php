@@ -3,7 +3,7 @@
 @section('content')
 <section class="intro">
   <div class="bg-image h-100">
-    <div class="mask d-flex align-items-center h-100" style="background-color: ">
+    <div class="mask d-flex align-items-center h-100" style="background-color:">
       <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
           <div class="col-12 col-lg-9 col-xl-8">
@@ -20,7 +20,7 @@
                   <div class="card-body py-5 px-4 p-md-5">
 
                   <form action="{{route('login.post')}}" method="POST" class="ms-auto me-auto" style="width: 500px">
-               @csrf
+                       @csrf
                       <h4 class="fw-bold mb-4" style="color: #92aad0;">Log in to your account</h4>
                       <p class="mb-4" style="color: #45526e;">To log in, please fill in these text fiels with your e-mail address and password.</p>
 

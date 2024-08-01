@@ -18,4 +18,4 @@ Route::post('/jpr', [AuthManager::class, 'jprPost'])->name('jpr.post');
 Route::get('/job', [AuthManager::class, 'job'])->name('job');
 Route::post('/job', [AuthManager::class, 'jobPost'])->name('job.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
-Route::get('/show-posts', [AuthManager::class, 'showPosts'])->name('show.posts');
+Route::post('/jobpost', [AuthManager::class, 'apply'])->name('flash');
